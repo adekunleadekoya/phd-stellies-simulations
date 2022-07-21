@@ -35,9 +35,11 @@ class Sampling:
             Samples points in a two dimensional array
 
         """
+
         val = self._do(problem, n_samples, **kwargs)
 
         if pop is None:
+           # print(f"came here in sample: {pop}")
             return val
 
         return Population.new("X", val)

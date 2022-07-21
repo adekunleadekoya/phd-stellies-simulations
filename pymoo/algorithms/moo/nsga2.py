@@ -14,6 +14,8 @@ from pymoo.util.nds.non_dominated_sorting import NonDominatedSorting
 from pymoo.util.randomized_argsort import randomized_argsort
 from pymoo.util.termination.default import MultiObjectiveDefaultTermination
 
+from pymoo.core.evaluator import Evaluator
+
 
 # ---------------------------------------------------------------------------------------------------------
 # Binary Tournament Selection Function
@@ -32,7 +34,7 @@ def binary_tournament(pop, P, algorithm, **kwargs):
     for i in range(n_tournaments):
 
         a, b = P[i, 0], P[i, 1]
-        a_cv, a_f, b_cv, b_f, = pop[a].CV[0], pop[a].F, pop[b].CV[0], pop[b].F
+        a_cv, a_f, b_cv, b_f, = pop[a].CV[0], pop[a].F, pop[b].CV[0], pop[b].F 
         rank_a, cd_a  = pop[a].get("rank", "crowding")
         rank_b, cd_b = pop[b].get("rank", "crowding")
 
@@ -154,13 +156,20 @@ class NSGA2(GeneticAlgorithm):
                          advance_after_initial_infill=True,
                          **kwargs)
         self.default_termination = MultiObjectiveDefaultTermination()
-        self.tournament_type = 'comp_by_dom_and_crowding'
+        self.tournament_type = 'comp_by_dom_and_crowding' 
+        self.name ="nsga2"
 
     def _set_optimum(self, **kwargs):
         if not has_feasible(self.pop):
             self.opt = self.pop[[np.argmin(self.pop.get("CV"))]]
         else:
             self.opt = self.pop[self.pop.get("rank") == 0]
+
+
+    
+
+
+
 
 
 def calc_crowding_distance(F, filter_out_duplicates=True):
@@ -212,6 +221,7 @@ def calc_crowding_distance(F, filter_out_duplicates=True):
 
     # crowding[np.isinf(crowding)] = 1e+14
     return crowding
+
 
 
 parse_doc_string(NSGA2.__init__)

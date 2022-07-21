@@ -123,3 +123,10 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+
+pymoo_at_kunle/Experiments/CHPC_Remote Results/*
+pymoo/*
+pymoo_at_kunle/Experiments/POFs/*
+pymoo_at_kunle/Experiments/Results/*
+pymoo_at_kunle/Experiments/Preprocess/*

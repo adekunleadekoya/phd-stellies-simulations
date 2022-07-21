@@ -55,17 +55,13 @@ class ReplacementSurvival(Survival):
 
 class ImprovementReplacement(ReplacementSurvival):
 
-    def _do(self, problem, pop, off, **kwargs):
-
-        ret = np.full((len(pop), 1), False)
-
+    def _do(self, problem, pop, off, **kwargs): 
+        ret = np.full((len(pop), 1), False) 
         pop_F, pop_CV = pop.get("F", "CV")
-        off_F, off_CV = off.get("F", "CV")
-
+        off_F, off_CV = off.get("F", "CV") 
         eps = 0.0
         # eps = calc_adapt_eps(pop)
         pop_feasible, off_feasible = pop_CV <= eps, off_CV <= eps
-
         if problem.n_constr > 0:
 
             # 1) Both infeasible and constraints have been improved
@@ -82,8 +78,7 @@ class ImprovementReplacement(ReplacementSurvival):
 
         # never allow duplicates to become part of the population when replacement is used
         _, _, is_duplicate = DefaultDuplicateElimination(epsilon=0.0).do(off, pop, return_indices=True)
-        ret[is_duplicate] = False
-
+        ret[is_duplicate] = False 
         return ret[:, 0]
 
 

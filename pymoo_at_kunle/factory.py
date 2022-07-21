@@ -421,6 +421,7 @@ def get_performance_indicator_options():
     from pymoo.indicators.igd_plus import IGDPlus
     from pymoo.indicators.hv import Hypervolume
     from pymoo.indicators.rmetric import RMetric
+    from pymoo_at_kunle.indicators.s import S # Spread/Spacing indicator
 
     PERFORMANCE_INDICATOR = [
         ("gd", GD),
@@ -428,7 +429,8 @@ def get_performance_indicator_options():
         ("igd", IGD),
         ("igd+", IGDPlus),
         ("hv", Hypervolume),
-        ("rmetric", RMetric)
+        ("rmetric", RMetric),
+        ("s", S)
     ]
     return PERFORMANCE_INDICATOR
 

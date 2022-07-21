@@ -4,6 +4,8 @@ from pymoo.core.problem import Problem
 from pymoo.util.reference_direction import UniformReferenceDirectionFactory
 from pymoo.util.remote import Remote
 
+ 
+
 
 class DTLZ(Problem):
     def __init__(self, n_var, n_obj, k=None):
@@ -254,10 +256,16 @@ def generic_sphere(ref_dirs):
 
 
 def get_ref_dirs(n_obj):
+
+
+    from pymoo.factory import get_visualization, get_reference_directions
+    from pymoo.util.ref_dirs.energy import RieszEnergyReferenceDirectionFactory
+
     if n_obj == 2:
-        ref_dirs = UniformReferenceDirectionFactory(2, n_points=100).do()
+        ref_dirs = UniformReferenceDirectionFactory(n_obj, n_points=100).do()
     elif n_obj == 3:
-        ref_dirs = UniformReferenceDirectionFactory(3, n_partitions=15).do()
+        ref_dirs = UniformReferenceDirectionFactory(n_obj, n_partitions=15).do()  
     else:
-        raise Exception("Please provide reference directions for more than 3 objectives!")
+         ref_dirs = get_reference_directions("energy", n_obj, 100, seed=1)
+        #raise Exception("Please provide reference directions for more than 3 objectives!")
     return ref_dirs

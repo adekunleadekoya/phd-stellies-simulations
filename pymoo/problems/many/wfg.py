@@ -31,7 +31,8 @@ class WFG(Problem):
         if l:
             self.l = l
         else:
-            self.l = n_var - self.k
+            self.l = n_var - self.k          
+ 
 
         self.validate(self.l, self.k, self.n_obj)
 

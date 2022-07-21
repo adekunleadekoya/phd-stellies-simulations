@@ -58,16 +58,16 @@ def minimize(problem,
         The optimization result represented as an object.
 
     """
-
+ 
     # create a copy of the algorithm object to ensure no side-effects
     if copy_algorithm:
         algorithm = copy.deepcopy(algorithm)
 
     # initialize the algorithm object given a problem - if not set already
-    if algorithm.problem is None:
+    if algorithm.problem is None:  
         algorithm.setup(problem, termination=termination, **kwargs)
     else:
-        if termination is not None:
+        if termination is not None: 
             algorithm.termination = termination_from_tuple(termination)
 
     # if no termination could be found add the default termination either for single or multi objective
@@ -84,6 +84,7 @@ def minimize(problem,
 
     # store the deep copied algorithm in the result object
     res.algorithm = algorithm
+    
 
     return res
 

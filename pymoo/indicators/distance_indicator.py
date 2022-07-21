@@ -33,8 +33,7 @@ class DistanceIndicator(Indicator):
 
         # the pareto front if necessary to calculate the indicator
         pf = at_least_2d_array(pf, extend_as="row")
-        ideal, nadir = derive_ideal_and_nadir_from_pf(pf, ideal=ideal, nadir=nadir)
-
+        ideal, nadir = derive_ideal_and_nadir_from_pf(pf, ideal=ideal, nadir=nadir) 
         super().__init__(zero_to_one=zero_to_one, ideal=ideal, nadir=nadir, **kwargs)
         self.dist_func = dist_func
         self.axis = axis

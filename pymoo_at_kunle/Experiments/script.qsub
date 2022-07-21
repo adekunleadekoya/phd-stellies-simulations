@@ -1,0 +1,27 @@
+#!/bin/bash
+#PBS -N pyEMOA
+#PBS -l select=1:ncpus=24:mpiprocs=24
+#PBS -P CSCI0886
+#PBS -q smp  
+#PBS -l walltime=00:30:00
+#PBS -M adekunleadekoya@gmail.com
+ 
+ 
+
+module add chpc/gnu/parallel-20160422
+CWD=/mnt/lustre/users/$USER/phd/pymoo
+
+cd $CWD  
+
+ 
+chmod u+x 100.sh 
+chmod u+x 21.sh 
+ 
+
+
+
+  
+
+ls ${CWD}/* | parallel -M -j 22 -u --sshloginfile ${PBS_NODEFILE} "cd ${CWD}/; {} {}"
+
+

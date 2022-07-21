@@ -73,16 +73,19 @@ class GeneticAlgorithm(Algorithm):
 
     def _initialize_infill(self):
         pop = self.initialization.do(self.problem, self.pop_size, algorithm=self)
+    
         pop.set("n_gen", self.n_gen)
         return pop
 
     def _initialize_advance(self, infills=None, **kwargs):
         if self.advance_after_initial_infill:
             self.pop = self.survival.do(self.problem, infills, n_survive=len(infills))
+    
 
     def _infill(self):
 
         # do the mating using the current population
+
         off = self.mating.do(self.problem, self.pop, self.n_offsprings, algorithm=self)
 
         # if the mating could not generate any new offspring (duplicate elimination might make that happen)

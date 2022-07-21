@@ -76,7 +76,7 @@ class Algorithm:
         # DEFAULT SETTINGS OF ALGORITHM
         # !
         # the termination criterion to be used by the algorithm - might be specific for an algorithm
-        self.termination = kwargs.get("termination")
+        self.termination = kwargs.get("termination") 
         # set the display variable supplied to the algorithm - might be specific for an algorithm
         self.display = kwargs.get("display")
         # callback to be executed each generation
@@ -119,6 +119,8 @@ class Algorithm:
         self.is_initialized = False
         # the time when the algorithm has been setup for the first time
         self.start_time = None
+
+        self.id_1 = None 
 
     # =========================================================================================================
     # PUBLIC
@@ -182,7 +184,7 @@ class Algorithm:
 
         # the termination criterion to be used to stop the algorithm
         if self.termination is None:
-            self.termination = termination_from_tuple(termination)
+            self.termination = termination_from_tuple(termination) 
         # if nothing given fall back to default
         if self.termination is None:
             self.termination = self.default_termination
@@ -198,6 +200,7 @@ class Algorithm:
         # !
 
         # no call the algorithm specific setup given the problem
+
         self._setup(problem, **kwargs)
 
         return self
@@ -223,10 +226,11 @@ class Algorithm:
     def finalize(self):
         return self._finalize()
 
-    def next(self):
-
+    def next(self):          
         # get the infill solutions
         infills = self.infill()
+
+       # print (f"inflls: {infills}")
 
         # call the advance with them after evaluation
         if infills is not None:
@@ -267,10 +271,13 @@ class Algorithm:
         else:
             # request the infill solutions if the algorithm has implemented it
             infills = self._infill()
+ 
 
         # set the current generation to the offsprings
         if infills is not None:
             infills.set("n_gen", self.n_gen)
+
+     
 
         return infills
 
@@ -320,7 +327,10 @@ class Algorithm:
         res.end_time = time.time()
         res.exec_time = res.end_time - res.start_time
 
+         
         res.pop = self.pop
+
+  
 
         # get the optimal solution found
         opt = self.opt
@@ -413,5 +423,6 @@ class Algorithm:
     def _advance(self, infills=None, **kwargs):
         pass
 
+    
     def _finalize(self):
         pass

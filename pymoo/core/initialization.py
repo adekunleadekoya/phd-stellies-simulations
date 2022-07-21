@@ -18,16 +18,20 @@ class Initialization:
         self.repair = repair if repair is not None else NoRepair()
 
     def do(self, problem, n_samples, **kwargs):
+     
+        # provide a whole population object - (individuals might be already evaluated) 
 
-        # provide a whole population object - (individuals might be already evaluated)
         if isinstance(self.sampling, Population):
             pop = self.sampling
 
-        else:
+        else: 
+
             if isinstance(self.sampling, np.ndarray):
                 pop = Population.new(X=self.sampling)
+                
             else:
                 pop = self.sampling.do(problem, n_samples, **kwargs)
+         
 
         # repair all solutions that are not already evaluated
         not_eval_yet = [k for k in range(len(pop)) if pop[k].F is None]
@@ -35,6 +39,6 @@ class Initialization:
             pop[not_eval_yet] = self.repair.do(problem, pop[not_eval_yet], **kwargs)
 
         # filter duplicate in the population
-        pop = self.eliminate_duplicates.do(pop)
-
+        pop = self.eliminate_duplicates.do(pop)  
+        
         return pop

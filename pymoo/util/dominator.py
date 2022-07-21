@@ -57,15 +57,19 @@ class Dominator:
             constr = (CV[:, None] < CV) * 1 + (CV[:, None] > CV) * -1
         """
 
+        
         if _F is None:
             _F = F
 
         # look at the obj for dom
+        
         n = F.shape[0]
-        m = _F.shape[0]
+        m = _F.shape[0]  
 
         L = np.repeat(F, m, axis=0)
         R = np.tile(_F, (n, 1))
+
+         
 
         smaller = np.reshape(np.any(L + epsilon < R, axis=1), (n, m))
         larger = np.reshape(np.any(L > R + epsilon, axis=1), (n, m))

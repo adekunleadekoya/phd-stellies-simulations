@@ -13,7 +13,7 @@ def test_same_seed_same_result():
 
     res1 = minimize(problem, algorithm, ('n_gen', 20), seed=1)
     np.random.seed(200)
-    res2 = minimize(problem, algorithm, ('n_gen', 20), seed=1)
+    res2 = minimize(problem, algorithm, ('n_gen', 20), seed=200)
 
     np.testing.assert_almost_equal(res1.X, res2.X)
     np.testing.assert_almost_equal(res1.F, res2.F)
